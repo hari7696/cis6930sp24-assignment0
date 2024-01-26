@@ -5,30 +5,43 @@ import argparse
 def main(url):
 
     # downloading the pdf file
-    pdf_byte_stream = download_pdf(url)
+    #pdf_byte_stream = download_pdf(url)
+    logging.info("Downloaded the pdf file")
 
     # parsing the pdf file
-    df = pdf_parser(pdf_byte_stream)
+    df = pdf_parser('pdf_byte_stream')
+    logging.info("Parsed the pdf file")
 
     # creating the database
     conn = createdb()
+    logging.info("Created the database")
+
     create_table(conn)
+    logging.info("Created the table")
 
     # populating the database
     populate_db(conn, df)
+    logging.info("Populated the database")
     conn.commit()
 
     #querying db
-    query = '''SELECT Nature, count(*) as num_incidents FROM incidents GROUP BY Nature ORDER BY num_incidents DESC, Nature;'''
+    query = '''SELECT nature, count(*) as num_incidents FROM incidents GROUP BY nature ORDER BY num_incidents DESC, nature;'''
 
     query_output = query_db(conn, query)
+    logging.info("Query run successfully")
+
     for row in query_output:
         print("|".join(map(str, row)))
 
     conn.close()
+    logging.info("Closed the database connection")
 
 if __name__ == '__main__':
     
+    import logging
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
+                        filename='tests/assignment0.log', filemode='a')
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--incidents", type=str, required=True, 
                          help="Incident summary url.")

@@ -4,12 +4,17 @@ from pypdf import PdfReader
 import io
 import pickle
 import re
+import logging
+logger = logging.getLogger(__name__)
 
 def download_pdf(url):
+
+    """Function to download the pdf file from the url"""
 
     headers = {}
     headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"                          
     data = io.BytesIO(urllib.request.urlopen(urllib.request.Request(url, headers=headers)).read())   
+    logger.info("Downloaded the pdf file")
 
     #pickle.dump(data, open('filename', 'wb'))                                                                            
 
@@ -17,15 +22,16 @@ def download_pdf(url):
 
 def split_line_regex(line):
 
+    """Function to split the line based on the regex"""
+
     lst_str =  re.split(r'\s{2,}', line)
     lst_str = [item.strip() for item in lst_str]
     return lst_str
 
 
-# unit test
-#https://stackoverflow.com/questions/66870366/pypdf2-extracting-all-pages-and-converting-to-csv
-
 def pdf_parser(pdf_stream):
+
+    """Function to parse the pdf file and return the dataframe"""
 
     PAGE_ONE = True
     EXPECTED_FIELDS = 5
@@ -33,8 +39,10 @@ def pdf_parser(pdf_stream):
     FIELD_NAMES_ROW = 2
 
     lst_lines = []
-    #pdf_file = PdfReader(pickle.load(open('filename', 'rb')))
-    pdf_file = PdfReader(pdf_stream)
+    pdf_file = PdfReader(pickle.load(open('filename', 'rb')))
+    logger.info("Read the pdf byte stream")
+    logger.debug("number of pages in the pdf {}".format(len(pdf_file.pages)))
+    #pdf_file = PdfReader(pdf_stream)
     pdf_file.pages[0].extract_text()
     for page in pdf_file.pages:
         
@@ -57,6 +65,7 @@ def pdf_parser(pdf_stream):
 
     # creating the dataframe
     df = pd.DataFrame(lst_lines, columns = field_names)
+    logger.debug("Number of records in dataframe {}".format(len(df)))
 
     #df.to_csv('resources/temp.csv')
 
@@ -68,7 +77,7 @@ def pdf_parser(pdf_stream):
 
 
 
-if __name__ == '__main__':
-    #pdf_stream = download_pdf('https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf', '/tmp/test.pdf')
+# if __name__ == '__main__':
+#     #pdf_stream = download_pdf('https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf', '/tmp/test.pdf')
     
-    print(pdf_parser('pdf_stream'))
+#     print(pdf_parser('pdf_stream'))
