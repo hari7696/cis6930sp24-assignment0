@@ -147,7 +147,7 @@ query_db()
     result (object): The result of the query execution.
     """
 
-# Database Development
+## Database Development
 
 SQLite is used in this project for database development due to its lightweight nature and ease of use. 
 SQLite is a self-contained, serverless, and zero-configuration database engine that allows for easy integration into applications. 
@@ -159,7 +159,8 @@ Additionally, SQLite supports standard SQL syntax, making it compatible with exi
 In this project a simple table 'indicents' with five fileds 
 ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'] is created and the datatypes for all the fields is TEXT
 
-```CREATE TABLE incidents (
+```
+        CREATE TABLE incidents (
                 incident_time TEXT,
                 incident_number TEXT,
                 incident_location TEXT,
@@ -167,7 +168,7 @@ In this project a simple table 'indicents' with five fileds
                 incident_ori TEXT
             );
 ```
-During the data insertion, the inbuit functionality of pandas dataFrame 'to_sql' is used, 
+During the data insertion, the inbuit functionality of pandas dataFrame ```to_sql``` is used, 
 as its the quickest way with out the need of any explicit code that require iterations.
 The pandas library automatically matches the field names present in dataframe with the table fields and performs the records insertion
 
