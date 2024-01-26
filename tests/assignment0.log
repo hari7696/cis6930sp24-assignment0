@@ -93,3 +93,20 @@
 01/26/2024 16:14:33 - root - INFO - Populated the database
 01/26/2024 16:14:33 - root - INFO - Query run successfully
 01/26/2024 16:14:33 - root - INFO - Closed the database connection
+01/26/2024 17:15:57 - utilities - INFO - Downloaded the PDF file
+01/26/2024 17:15:57 - root - INFO - Downloaded the pdf file
+01/26/2024 17:15:57 - utilities - INFO - Read the pdf byte stream
+01/26/2024 17:15:57 - utilities - DEBUG - number of pages in the pdf 19
+01/26/2024 17:15:57 - utilities - DEBUG - Number of records in dataframe 309
+01/26/2024 17:15:57 - root - INFO - Parsed the pdf file
+01/26/2024 17:15:57 - db_components - INFO - Created the db
+01/26/2024 17:15:57 - root - INFO - Created the database
+01/26/2024 17:15:57 - db_components - INFO - table creation successful
+01/26/2024 17:15:57 - root - INFO - Created the table
+01/26/2024 17:15:57 - db_components - DEBUG - columns names Index(['incident_time', 'incident_number', 'incident_location', 'nature',
+       'incident_ori'],
+      dtype='object')
+01/26/2024 17:15:57 - db_components - INFO - Populated the db
+01/26/2024 17:15:57 - root - INFO - Populated the database
+01/26/2024 17:15:57 - root - INFO - Query run successfully
+01/26/2024 17:15:57 - root - INFO - Closed the database connection

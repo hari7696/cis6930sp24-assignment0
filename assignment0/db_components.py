@@ -13,9 +13,14 @@ def createdb():
         conn (sqlite3.Connection): Connection object representing the newly created database.
     """
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
-    print(
-        abs_path,
-    )
+    logger.debug(" Database Absolute path {}".format(abs_path))
+
+    if os.path.exists(os.path.join(abs_path, "resources")):
+        logger.debug("resources folder exists")
+    else:
+        os.mkdir(os.path.join(abs_path, "resources"))
+        logger.debug("resources folder created")
+
     # Checking if there is an existing db
     if os.path.exists(os.path.join(abs_path, "resources", "normandb")):
         os.remove(os.path.join(abs_path, "resources", "normandb"))
