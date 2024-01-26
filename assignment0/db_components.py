@@ -17,11 +17,11 @@ def createdb():
         abs_path,
     )
     # Checking if there is an existing db
-    if os.path.exists(os.path.join(abs_path, "resources", "test.db")):
-        os.remove(os.path.join(abs_path, "resources", "test.db"))
+    if os.path.exists(os.path.join(abs_path, "resources", "normandb")):
+        os.remove(os.path.join(abs_path, "resources", "normandb"))
         logger.debug("Removed the existing db")
 
-    conn = sqlite3.connect(os.path.join(abs_path, "resources", "test.db"))
+    conn = sqlite3.connect(os.path.join(abs_path, "resources", "normandb"))
     logger.info("Created the db")
     return conn
 
