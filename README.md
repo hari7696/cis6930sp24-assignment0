@@ -30,7 +30,7 @@ Run the follwing pipenv command to create the required environment
 
 Run the follwing pipenv command to execute the program
 
-```pipenv run python assignment0\main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
+```pipenv run python assignment0/main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
 ### Test cases run
 
 The test doesnt need any explicit inputs, running following pipenv command run the pytest cases. The project have 6 test cases.
