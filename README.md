@@ -31,6 +31,11 @@ Run the follwing pipenv command to create the required environment
 Run the follwing pipenv command to execute the program
 
 ```pipenv run python assignment0\main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
+### Test cases run
+
+The test doesnt need any explicit inputs, running following pipenv command run the pytest cases. The project have 6 test cases.
+
+```pipenv run python -m pytest```
 
 ## Functions
 
@@ -176,6 +181,9 @@ The following SQL query is developed to get the summary on the incidents nature
     the behaviour od the code can be unpredicatable, it may even break
 2. For the expected outcome, its assumed that the structure of the pdf file remains same as given in assignment
 3. The code should have write access to the resources directory
+4. Assumption: the fields present in pdf will be in the order ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori']
+5. Asuumption: the first 2 rows of the pdf is junk data, so it gets removed everytime
+6. The last row of the pdf have a time stamp, so its ignroed as junk value
 
 
 

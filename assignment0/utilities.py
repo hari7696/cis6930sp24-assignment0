@@ -77,11 +77,12 @@ def pdf_parser(pdf_stream):
     FIELD_NAMES_ROW = 2
 
     lst_lines = []
-    pdf_file = PdfReader(pickle.load(open("filename", "rb")))
+    #pdf_file = PdfReader(pickle.load(open("filename", "rb")))
+    pdf_file = PdfReader(pdf_stream)
     logger.info("Read the pdf byte stream")
     logger.debug("number of pages in the pdf {}".format(len(pdf_file.pages)))
-    # pdf_file = PdfReader(pdf_stream)
     pdf_file.pages[0].extract_text()
+
     for page in pdf_file.pages:
 
         # extracting the context with layout method, the behavior can be truly unpredictable if the pdf format/structure changes
@@ -104,7 +105,7 @@ def pdf_parser(pdf_stream):
         lst_lines = [item for item in lst_lines if len(item) == EXPECTED_FIELDS]
 
     # creating the dataframe
-    df = pd.DataFrame(lst_lines, columns=field_names)
+    df = pd.DataFrame(lst_lines, columns=['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'])
     logger.debug("Number of records in dataframe {}".format(len(df)))
 
     # df.to_csv('resources/temp.csv')
