@@ -2,14 +2,25 @@ from utilities import *
 from db_components import *
 import argparse
 
+
 def main(url):
+    """
+    Downloads a PDF file from the given URL, parses it, creates a database, populates the database with data from the PDF,
+    executes a query on the database, and prints the query results.
+
+    Parameters:
+    url (str): The URL of the PDF file to download.
+
+    Returns:
+    None
+    """
 
     # downloading the pdf file
-    #pdf_byte_stream = download_pdf(url)
+    # pdf_byte_stream = download_pdf(url)
     logging.info("Downloaded the pdf file")
 
     # parsing the pdf file
-    df = pdf_parser('pdf_byte_stream')
+    df = pdf_parser("pdf_byte_stream")
     logging.info("Parsed the pdf file")
 
     # creating the database
@@ -24,8 +35,8 @@ def main(url):
     logging.info("Populated the database")
     conn.commit()
 
-    #querying db
-    query = '''SELECT nature, count(*) as num_incidents FROM incidents GROUP BY nature ORDER BY num_incidents DESC, nature;'''
+    # querying db
+    query = """SELECT nature, count(*) as num_incidents FROM incidents GROUP BY nature ORDER BY num_incidents DESC, nature;"""
 
     query_output = query_db(conn, query)
     logging.info("Query run successfully")
@@ -36,16 +47,24 @@ def main(url):
     conn.close()
     logging.info("Closed the database connection")
 
-if __name__ == '__main__':
-    
+
+if __name__ == "__main__":
+
     import logging
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
-                        filename='tests/assignment0.log', filemode='a')
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        datefmt="%m/%d/%Y %H:%M:%S",
+        filename="tests/assignment0.log",
+        filemode="a",
+    )
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--incidents", type=str, required=True, 
-                         help="Incident summary url.")
-     
+    parser.add_argument(
+        "--incidents", type=str, required=True, help="Incident summary url."
+    )
+
     args = parser.parse_args()
     if args.incidents:
         main(args.incidents)
