@@ -26,10 +26,15 @@ Finally, a summary query will be executed on the SQLite database to provide insi
 Run the follwing pipenv command to create the required environment
 ```pipenv install```
 
-### Program run
+### How to run
 
-Run the follwing pipenv command to execute the program
 
+https://github.com/hari7696/cis6930sp24-assignment0/assets/148893192/c1983b85-14fe-4263-9af0-cec14cd52c0a
+
+Run the follwing pipenv commands to execute the program
+
+
+```pipenv install```
 ```pipenv run python assignment0/main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
 ### Test cases run
 
