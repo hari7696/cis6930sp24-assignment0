@@ -130,3 +130,43 @@
 01/28/2024 10:23:02 - root - INFO - Populated the database
 01/28/2024 10:23:02 - root - INFO - Query run successfully
 01/28/2024 10:23:02 - root - INFO - Closed the database connection
+01/28/2024 11:54:12 - utilities - INFO - Downloaded the PDF file
+01/28/2024 11:54:12 - root - INFO - Downloaded the pdf file
+01/28/2024 11:54:12 - utilities - INFO - Read the pdf byte stream
+01/28/2024 11:54:12 - utilities - DEBUG - number of pages in the pdf 19
+01/28/2024 11:54:12 - utilities - DEBUG - Number of records in dataframe 321
+01/28/2024 11:54:12 - root - INFO - Parsed the pdf file
+01/28/2024 11:54:12 - db_components - DEBUG -  Database Absolute path C:\Users\ghari\Documents\MS\DE\cis6930sp24-assignment0
+01/28/2024 11:54:12 - db_components - DEBUG - resources folder exists
+01/28/2024 11:54:12 - db_components - DEBUG - Removed the existing db
+01/28/2024 11:54:12 - db_components - INFO - Created the db
+01/28/2024 11:54:12 - root - INFO - Created the database
+01/28/2024 11:54:12 - db_components - INFO - table creation successful
+01/28/2024 11:54:12 - root - INFO - Created the table
+01/28/2024 11:54:12 - db_components - DEBUG - columns names Index(['incident_time', 'incident_number', 'incident_location', 'nature',
+       'incident_ori'],
+      dtype='object')
+01/28/2024 11:54:12 - db_components - INFO - Populated the db
+01/28/2024 11:54:12 - root - INFO - Populated the database
+01/28/2024 11:54:12 - root - INFO - Query run successfully
+01/28/2024 11:54:12 - root - INFO - Closed the database connection
+01/28/2024 12:47:39 - utilities - INFO - Downloaded the PDF file
+01/28/2024 12:47:39 - root - INFO - Downloaded the pdf file
+01/28/2024 12:47:39 - utilities - INFO - Read the pdf byte stream
+01/28/2024 12:47:39 - utilities - DEBUG - number of pages in the pdf 19
+01/28/2024 12:47:39 - utilities - DEBUG - Number of records in dataframe 321
+01/28/2024 12:47:39 - root - INFO - Parsed the pdf file
+01/28/2024 12:47:39 - db_components - DEBUG -  Database Absolute path C:\Users\ghari\Documents\MS\DE\cis6930sp24-assignment0
+01/28/2024 12:47:39 - db_components - DEBUG - resources folder exists
+01/28/2024 12:47:39 - db_components - DEBUG - Removed the existing db
+01/28/2024 12:47:39 - db_components - INFO - Created the db
+01/28/2024 12:47:39 - root - INFO - Created the database
+01/28/2024 12:47:39 - db_components - INFO - table creation successful
+01/28/2024 12:47:39 - root - INFO - Created the table
+01/28/2024 12:47:39 - db_components - DEBUG - columns names Index(['incident_time', 'incident_number', 'incident_location', 'nature',
+       'incident_ori'],
+      dtype='object')
+01/28/2024 12:47:39 - db_components - INFO - Populated the db
+01/28/2024 12:47:39 - root - INFO - Populated the database
+01/28/2024 12:47:39 - root - INFO - Query run successfully
+01/28/2024 12:47:39 - root - INFO - Closed the database connection
