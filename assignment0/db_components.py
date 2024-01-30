@@ -22,11 +22,11 @@ def createdb():
         logger.debug("resources folder created")
 
     # Checking if there is an existing db
-    if os.path.exists(os.path.join(abs_path, "resources", "normandb")):
-        os.remove(os.path.join(abs_path, "resources", "normandb"))
+    if os.path.exists(os.path.join(abs_path, "resources", "normanpd.db")):
+        os.remove(os.path.join(abs_path, "resources", "normanpd.db"))
         logger.debug("Removed the existing db")
 
-    conn = sqlite3.connect(os.path.join(abs_path, "resources", "normandb"))
+    conn = sqlite3.connect(os.path.join(abs_path, "resources", "normanpd.db"))
     logger.info("Created the db")
     return conn
 
