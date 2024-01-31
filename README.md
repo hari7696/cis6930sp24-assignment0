@@ -84,13 +84,13 @@ pdf_parser()
     Details:
     This function takes a byte stream of a PDF file and extracts the data from it. It assumes that the PDF file
     has a specific structure with field names in a certain row and a fixed number of fields per row. The function
-    uses the PyPDF2 library to read the PDF file and extract the text from each page. It then splits the extracted
+    uses the PyPDF library to read the PDF file and extract the text from each page. It then splits the extracted
     text into lines and processes each line to extract the field values. Junk lines that do not have the expected
     number of fields are removed. Finally, the extracted data is converted into a pandas DataFrame and returned.
 
     Note:
     - The behavior of this function can be unpredictable if the PDF format/structure changes.
-    - The PyPDF2 library is required to run this function.
+    - The PyPDF library is required to run this function.
 
 
 split_line_regex()
@@ -137,8 +137,6 @@ populate_db()
     - Renames the columns of the DataFrame to ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'].
     - Inserts the data from the DataFrame into the 'incidents' table in the database.
     - If the 'incidents' table already exists, the data is appended to it.
-    - Logs a debug message with the column names of the DataFrame.
-    - Logs an info message indicating that the database has been populated.
 
 query_db()
     
