@@ -74,6 +74,7 @@ def pdf_parser(pdf_stream):
     PAGE_ONE = True
     EXPECTED_FIELDS = 5
     NUMBER_OF_JUNK_LINES = 3
+    NUMBER_END_JUNK_LINES = 1
     FIELD_NAMES_ROW = 2
 
     lst_lines = []
@@ -102,10 +103,12 @@ def pdf_parser(pdf_stream):
         lst_lines.extend([split_line_regex(item) for item in page_extract])
 
         # there might be some junk rows which might not have all the fields, so removing them
-        lst_lines = [item for item in lst_lines if len(item) == EXPECTED_FIELDS]
-
+        #lst_lines = [item for item in lst_lines if len(item) == EXPECTED_FIELDS]
+    lst_lines = lst_lines[:-NUMBER_END_JUNK_LINES]
     # creating the dataframe
     df = pd.DataFrame(lst_lines, columns=['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'])
+    df['nature'] = df['nature'].apply(lambda x : '' if x is None else x )
+
     logger.debug("Number of records in dataframe {}".format(len(df)))
 
     # df.to_csv('resources/temp.csv')

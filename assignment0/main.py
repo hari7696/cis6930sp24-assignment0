@@ -36,15 +36,21 @@ def main(url):
     conn.commit()
 
     # querying db
-    query = """SELECT nature, count(*) as num_incidents FROM incidents GROUP BY nature ORDER BY num_incidents DESC, nature;"""
+    query = """SELECT nature, count(*) as num_incidents FROM incidents GROUP BY nature ORDER BY num_incidents DESC, nature NULLS first"""
 
     query_output = query_db(conn, query)
     logging.info("Query run successfully")
 
     # printing the query results
     for row in query_output:
-        print("|".join(map(str, row)))
-    print("{}".format(url[-50:]))
+        temp_string = "|".join(map(str, row))
+        if row[0] == '':
+            store_string = temp_string
+        else:
+            print(temp_string)
+
+    print(store_string)
+    logging.debug("store string {}".format(store_string))
     conn.close()
     logging.info("Closed the database connection")
 
