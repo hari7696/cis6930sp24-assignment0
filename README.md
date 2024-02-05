@@ -34,8 +34,9 @@ https://github.com/hari7696/cis6930sp24-assignment0/assets/148893192/c1983b85-14
 Run the follwing pipenv commands to execute the program
 
 
-```pipenv install```
-```pipenv run python assignment0/main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
+1. ```pipenv install```
+
+2. ```pipenv run python assignment0/main.py --incidents https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf```
 ### Test cases run
 
 The test doesnt need any explicit inputs, running following pipenv command run the pytest cases. The project have 6 test cases.
@@ -188,6 +189,8 @@ The following SQL query is developed to get the summary on the incidents nature
 4. Assumption: the fields present in pdf will be in the order ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori']
 5. Asuumption: the first 2 rows of the pdf is junk data, so it gets removed everytime
 6. The last row of the pdf have a time stamp, so its ignroed as junk value
+7. The missing fileds should be 2 atmost. i., the record will always have atleast 3 fields present in them. if it misses more than 2 fields, 
+    will get dropped
 
 
 

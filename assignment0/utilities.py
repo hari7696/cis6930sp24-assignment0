@@ -72,7 +72,7 @@ def pdf_parser(pdf_stream):
     - The PyPDF2 library is required to run this function."""
 
     PAGE_ONE = True
-    EXPECTED_FIELDS = 5
+    EXPECTED_MIN_FIELDS = 3
     NUMBER_OF_JUNK_LINES = 3
     NUMBER_END_JUNK_LINES = 1
     FIELD_NAMES_ROW = 2
@@ -103,7 +103,8 @@ def pdf_parser(pdf_stream):
         lst_lines.extend([split_line_regex(item) for item in page_extract])
 
         # there might be some junk rows which might not have all the fields, so removing them
-        #lst_lines = [item for item in lst_lines if len(item) == EXPECTED_FIELDS]
+        # sometimes, the address over flows and recorded as new row, so removing them, its assumed only two fields go missing at once
+        lst_lines = [item for item in lst_lines if len(item) >= EXPECTED_MIN_FIELDS]
     lst_lines = lst_lines[:-NUMBER_END_JUNK_LINES]
     # creating the dataframe
     df = pd.DataFrame(lst_lines, columns=['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'])
