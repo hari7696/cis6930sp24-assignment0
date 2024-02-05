@@ -44,9 +44,7 @@ def main(url):
     # printing the query results
     for row in query_output:
         print("|".join(map(str, row)))
-    
-    print("******{}*************************8".format(url))
-
+    print("{}".format(url[-50:]))
     conn.close()
     logging.info("Closed the database connection")
 
