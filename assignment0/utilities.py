@@ -105,7 +105,7 @@ def pdf_parser(pdf_stream):
         # there might be some junk rows which might not have all the fields, so removing them
         # sometimes, the address over flows and recorded as new row, so removing them, its assumed only two fields go missing at once
         lst_lines = [item for item in lst_lines if len(item) >= EXPECTED_MIN_FIELDS]
-    lst_lines = lst_lines[:-NUMBER_END_JUNK_LINES]
+    #lst_lines = lst_lines[:-NUMBER_END_JUNK_LINES]
     # creating the dataframe
     df = pd.DataFrame(lst_lines, columns=['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'])
     df['nature'] = df['nature'].apply(lambda x : '' if x is None else x )
