@@ -1,7 +1,7 @@
 import pytest
 import sys
 import os.path
-
+import pandas as pd
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 )
@@ -10,10 +10,11 @@ from assignment0.utilities import download_pdf, pdf_parser, split_line_regex
 from assignment0.db_components import createdb, create_table, populate_db, query_db
 
 
-def test_download_pdf():
-    url = "https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf"
+def test_download_pdf_and_pdf_parser():
+    url = "https://www.normanok.gov/sites/default/files/documents/2024-01/2024-01-01_daily_incident_summary.pdf"
     pdf_stream = download_pdf(url)
-    assert pdf_stream is not None
+    df = pdf_parser(pdf_stream)
+    assert len(df) > 0
 
 
 def test_split_line_regex():
@@ -26,14 +27,6 @@ def test_split_line_regex():
         "Traffic Stop",
         "OK0140200",
     ]
-
-
-def test_pdf_parser():
-    pdf_stream = download_pdf(
-        "https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf"
-    )
-    df = pdf_parser(pdf_stream)
-    assert len(df) > 0
 
 
 def test_createdb():
@@ -51,10 +44,10 @@ def test_create_table():
 
 def test_populate_db():
     conn = createdb()
-    pdf_stream = download_pdf(
-        "https://www.normanok.gov/sites/default/files/documents/2024-01/2023-12-31_daily_incident_summary.pdf"
-    )
-    df = pdf_parser(pdf_stream)
+    df = pd.DataFrame({'incident_time': ['12/31/2023 00:00:00'], 'incident_number': ['2023-00000001'],
+                        'incident_location': ['100 Bl'], 'nature': ['Traffic Stop'], 'incident_ori': ['OK0140200']})
+
+
     populate_db(conn, df)
     assert conn.execute("""SELECT count(*) FROM incidents;""").fetchone()[0] > 0
     conn.close()
