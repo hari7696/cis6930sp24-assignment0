@@ -41,16 +41,19 @@ def main(url):
     query_output = query_db(conn, query)
     logging.info("Query run successfully")
 
+    FLAG =False
     # printing the query results
     for row in query_output:
         temp_string = "|".join(map(str, row))
         if row[0] == '':
             store_string = temp_string
+            FLAG = True
         else:
             print(temp_string)
 
-    print(store_string)
-    logging.debug("store string {}".format(store_string))
+    if FLAG:
+        print(store_string)
+        logging.debug("store string {}".format(store_string))
     conn.close()
     logging.info("Closed the database connection")
 
