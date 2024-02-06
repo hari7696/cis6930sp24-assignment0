@@ -47,7 +47,7 @@ The test doesnt need any explicit inputs, running following pipenv command run t
 ## Functions
 
 
-main()
+### main()
     
 The is the caller function, it calls different modules in a sequence. The output of the function is a report printed via stdout
 
@@ -60,7 +60,7 @@ executes a query on the database, and prints the query results.
     Returns:
     None
 
-download_pdf()
+### download_pdf()
     
 Function to download a PDF file from a given URL.
 
@@ -73,7 +73,7 @@ Function to download a PDF file from a given URL.
     Raises:
     urllib.error.URLError: If there is an error while opening the URL.
 
-pdf_parser()
+### pdf_parser()
 
 Function to parse the pdf file and return the dataframe.
 
@@ -90,14 +90,14 @@ Note:
 - The variables present in this function needs manual updation if the pdf format changes or to handle new cases.
 - EXPECTED_MIN_FIELDS, NUMBER_OF_JUNK_LINES, FIELD_NAMES_ROW these need to be updated as per requirements
 
-    Parameters:
-    pdf_stream (bytes): The byte stream of the PDF file.
+      Parameters:
+      pdf_stream (bytes): The byte stream of the PDF file.
+    
+      Returns
+      pandas.DataFrame: The parsed data as a DataFrame.
 
-    Returns:
-    pandas.DataFrame: The parsed data as a DataFrame.
 
-
-split_line_regex()
+### split_line_regex()
 
 Split the line based on the regex pattern.
 
@@ -107,7 +107,7 @@ Split the line based on the regex pattern.
     Returns:
     list: A list of strings after splitting the line based on the regex pattern
 
-createdb()
+### createdb()
    
 Creates a new SQLite database and returns a connection object. If the database already exists, then its gets overwritten
 
@@ -115,7 +115,7 @@ Creates a new SQLite database and returns a connection object. If the database a
         conn (sqlite3.Connection): Connection object representing the newly created database.
     
 
-create_table()
+### create_table()
     
 Creates a table named 'incidents' in the database.
 
@@ -125,7 +125,7 @@ Creates a table named 'incidents' in the database.
     Returns:
     None
 
-populate_db()
+### populate_db()
     
 Populates the database with data from a DataFrame.
 Details:
@@ -140,7 +140,7 @@ Details:
         Returns:
         None
 
-query_db()
+### query_db()
     
 Execute a database query.
 
