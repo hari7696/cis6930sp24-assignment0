@@ -24,6 +24,7 @@ Finally, a summary query will be executed on the SQLite database to provide insi
 
 ### Environment setup
 Run the follwing pipenv command to create the required environment
+
 ```pipenv install```
 
 ### How to run
@@ -48,10 +49,10 @@ The test doesnt need any explicit inputs, running following pipenv command run t
 
 main()
     
-    The is the caller function, it calls different modules in a sequence. The output of the function is a report printed via stdout
-    
-    Downloads a PDF file from the given URL, parses it, creates a database, populates the database with data from the PDF,
-    executes a query on the database, and prints the query results.
+The is the caller function, it calls different modules in a sequence. The output of the function is a report printed via stdout
+
+Downloads a PDF file from the given URL, parses it, creates a database, populates the database with data from the PDF,
+executes a query on the database, and prints the query results.
 
     Parameters:
     url (str): The URL of the PDF file to download.
@@ -61,7 +62,7 @@ main()
 
 download_pdf()
     
-    Function to download a PDF file from a given URL.
+Function to download a PDF file from a given URL.
 
     Parameters:
     url (str): The URL of the PDF file to be downloaded.
@@ -74,7 +75,20 @@ download_pdf()
 
 pdf_parser()
 
-    Function to parse the pdf file and return the dataframe.
+Function to parse the pdf file and return the dataframe.
+
+Details:
+This function takes a byte stream of a PDF file and extracts the data from it. It assumes that the PDF file
+has a specific structure with field names in a certain row and a fixed number of fields per row. The function
+uses the PyPDF library to read the PDF file and extract the text from each page. It then splits the extracted
+text into lines and processes each line to extract the field values. Junk lines that do not have the expected
+number of fields are removed. Finally, the extracted data is converted into a pandas DataFrame and returned.
+
+Note:
+- The behavior of this function can be unpredictable if the PDF format/structure changes.
+- The PyPDF library is required to run this function.
+- The variables present in this function needs manual updation if the pdf format changes or to handle new cases.
+- EXPECTED_MIN_FIELDS, NUMBER_OF_JUNK_LINES, FIELD_NAMES_ROW these need to be updated as per requirements
 
     Parameters:
     pdf_stream (bytes): The byte stream of the PDF file.
@@ -82,32 +96,20 @@ pdf_parser()
     Returns:
     pandas.DataFrame: The parsed data as a DataFrame.
 
-    Details:
-    This function takes a byte stream of a PDF file and extracts the data from it. It assumes that the PDF file
-    has a specific structure with field names in a certain row and a fixed number of fields per row. The function
-    uses the PyPDF library to read the PDF file and extract the text from each page. It then splits the extracted
-    text into lines and processes each line to extract the field values. Junk lines that do not have the expected
-    number of fields are removed. Finally, the extracted data is converted into a pandas DataFrame and returned.
-
-    Note:
-    - The behavior of this function can be unpredictable if the PDF format/structure changes.
-    - The PyPDF library is required to run this function.
-
 
 split_line_regex()
 
-    """
-    Split the line based on the regex pattern.
+Split the line based on the regex pattern.
 
     Parameters:
     line (str): The input line to be split.
 
     Returns:
-    list: A list of strings after splitting the line based on the regex pattern."""
+    list: A list of strings after splitting the line based on the regex pattern
 
 createdb()
    
-    Creates a new SQLite database and returns a connection object.
+Creates a new SQLite database and returns a connection object. If the database already exists, then its gets overwritten
 
     Returns:
         conn (sqlite3.Connection): Connection object representing the newly created database.
@@ -115,7 +117,7 @@ createdb()
 
 create_table()
     
-    Creates a table named 'incidents' in the database.
+Creates a table named 'incidents' in the database.
 
     Parameters:
     conn (Connection): The database connection object.
@@ -125,23 +127,22 @@ create_table()
 
 populate_db()
     
-    Populates the database with data from a DataFrame.
+Populates the database with data from a DataFrame.
+Details:
+- Renames the columns of the DataFrame to ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'].
+- Inserts the data from the DataFrame into the 'incidents' table in the database.
+- If the 'incidents' table already exists, the data is appended to it.
 
-    Parameters:
-    conn (Connection): The database connection object.
-    df (DataFrame): The DataFrame containing the data to be inserted into the database.
+        Parameters:
+        conn (Connection): The database connection object.
+        df (DataFrame): The DataFrame containing the data to be inserted into the database.
 
-    Returns:
-    None
-
-    Details:
-    - Renames the columns of the DataFrame to ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'].
-    - Inserts the data from the DataFrame into the 'incidents' table in the database.
-    - If the 'incidents' table already exists, the data is appended to it.
+        Returns:
+        None
 
 query_db()
     
-    Execute a database query.
+Execute a database query.
 
     Parameters:
     conn (connection): The database connection object.
@@ -149,7 +150,7 @@ query_db()
 
     Returns:
     result (object): The result of the query execution.
-    """
+
 
 ## Database Development
 
@@ -161,7 +162,7 @@ It does not require a separate database server to be installed or configured, ma
 Additionally, SQLite supports standard SQL syntax, making it compatible with existing SQL-based tools and libraries.
 
 In this project a simple table 'indicents' with five fileds 
-['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori'] is created and the datatypes for all the fields is TEXT
+```['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori']``` is created and the datatypes for all the fields is ```TEXT```
 
 ```
         CREATE TABLE incidents (
@@ -185,11 +186,11 @@ The following SQL query is developed to get the summary on the incidents nature
 1. Extracting data pdf is really complicated, so if the structure of the changes from the given incident file, 
     the behaviour od the code can be unpredicatable, it may even break
 2. For the expected outcome, its assumed that the structure of the pdf file remains same as given in assignment
-3. The code should have write access to the resources directory
+3. Assumption: The code should have write access to the resources directory
 4. Assumption: the fields present in pdf will be in the order ['incident_time', 'incident_number', 'incident_location', 'nature', 'incident_ori']
 5. Asuumption: the first 2 rows of the pdf is junk data, so it gets removed everytime
 6. The last row of the pdf have a time stamp, so its ignroed as junk value
-7. The missing fileds should be 2 atmost. i., the record will always have atleast 3 fields present in them. if it misses more than 2 fields, 
+7. The missing fileds should be 2 atmost. i.e, the record will always have atleast 3 fields present in them. if it misses more than 2 fields, 
     will get dropped
 
 

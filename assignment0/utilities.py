@@ -63,7 +63,7 @@ def pdf_parser(pdf_stream):
     Details:
     This function takes a byte stream of a PDF file and extracts the data from it. It assumes that the PDF file
     has a specific structure with field names in a certain row and a fixed number of fields per row. The function
-    uses the PyPDF2 library to read the PDF file and extract the text from each page. It then splits the extracted
+    uses the PyPDF library to read the PDF file and extract the text from each page. It then splits the extracted
     text into lines and processes each line to extract the field values. Junk lines that do not have the expected
     number of fields are removed. Finally, the extracted data is converted into a pandas DataFrame and returned.
 
